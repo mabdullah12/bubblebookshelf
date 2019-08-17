@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model"
+                  type="com.muhammadabdullah.bubblebookshelf.model.BookPagesModel"/>
+
+        <variable name="viewmodel"
+                  type="com.muhammadabdullah.bubblebookshelf.viewmodel.BookPagesViewModel"/>
+
+
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+     <ImageView android:layout_width="match_parent" android:layout_height="wrap_content"
+     android:id="@+id/iv_grid"
+     android:src="@{model.pageImageUrl}"
+                android:onClick="@{() -> viewmodel.onGridItemClick(model)}"
+     />
+    <TextView
+            android:id="@+id/tv_grid"
+            android:text="@{model.pageName}"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+</LinearLayout>
+</layout>

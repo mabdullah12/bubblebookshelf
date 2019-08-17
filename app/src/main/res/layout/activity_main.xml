@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="viewmodel" type="com.muhammadabdullah.bubblebookshelf.viewmodel.BooksViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <GridView android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:id="@+id/item_models_grid"
+                  android:numColumns="auto_fit"
+                  android:verticalSpacing="10dp"
+                  android:horizontalSpacing="10dp"
+                  android:stretchMode="spacingWidthUniform"
+                  android:columnWidth="200dp"
+                  android:gravity="center"
+                  android:adapter="@{viewmodel.gridViewAdapter}"
+
+        >
+        </GridView>
+        <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent" android:layout_height="match_parent">
+        </FrameLayout>
+    </LinearLayout>
+</layout>
