@@ -1,5 +1,6 @@
 package com.muhammadabdullah.bubblebookshelf.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.muhammadabdullah.bubblebookshelf.R
@@ -17,13 +18,12 @@ class BooksViewModel : ViewModel(){
     var booksRepository  = BooksRepository()
     lateinit var gridViewAdapter : GridViewAdapter
     var booksList: MutableList<Any> = mutableListOf()
-    var liveData = MutableLiveData<MutableList<BooksModel>>()
-    var observableMutableList : Observable<MutableList<BooksModel>> = Observable.create(
-        ObservableOnSubscribe {
-            it.onNext(booksRepository.getBooksLive())
-            it.onComplete()
-        }
-    )
+//    var observableMutableList : Observable<MutableList<BooksModel>> = Observable.create(
+//        ObservableOnSubscribe {
+//            it.onNext(booksRepository.getBooksLive())
+//            it.onComplete()
+//        }
+//    )
     init {
 
 
@@ -41,8 +41,6 @@ class BooksViewModel : ViewModel(){
 
 
     }
-
-
 
 
 }

@@ -35,18 +35,12 @@ class MainActivity : AppCompatActivity(){
             R.layout.activity_main
         )
 
-        AWSMobileClient.getInstance().initialize(this) {
-            Log.d("Amazone", "AWSMobileClient is initialized")
-        }.execute()
 
-        booksViewModel = ViewModelProviders.of(this)[BooksViewModel::class.java] //AlphabetViewModel(this)
+
+        booksViewModel = ViewModelProviders.of(this)[BooksViewModel::class.java]
         booksViewModel.setAdapter()
         activityMainBinding.viewmodel = booksViewModel
 
-//        bookPagesViewModel.singleMutableLiveData.observe(this , Observer {
-//            var intent = Intent(this, BookActivity::class.java)
-//
-//        })
 
         booksViewModel.observable.subscribe {
             var intent = Intent(this, BookActivity::class.java)
@@ -54,39 +48,36 @@ class MainActivity : AppCompatActivity(){
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         }
 
-
-
-//        booksViewModel.liveData.observe(this, Observer {
-//            booksViewModel.booksList.clear()
-//            booksViewModel.booksList.addAll(it)
-//            booksViewModel.gridViewAdapter.notifyDataSetChanged()
-//        })
-
-
-        booksViewModel.observableMutableList.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe(
-
-         object  : io.reactivex.Observer<MutableList<BooksModel>>{
-             override fun onSubscribe(d: Disposable) {
-                 Log.d("RX","on Subcribe")
-             }
-
-             override fun onComplete() {
-                 Log.d("RX","on Complete")
-             }
-
-             override fun onNext(t: MutableList<BooksModel>) {
-                 booksViewModel.booksList.clear()
-                 booksViewModel.booksList.addAll(t)
+        booksViewModel.booksRepository.getAllBooksLive().observe(this, Observer {
+            booksViewModel.booksList.clear()
+                 booksViewModel.booksList.addAll(it)
                  booksViewModel.gridViewAdapter.notifyDataSetChanged()
-             }
+        })
 
-             override fun onError(e: Throwable) {
-                 Log.d("RX",e.message)
-             }
-
-
-         })
+//        booksViewModel.observableMutableList.subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread()).subscribe(
+//
+//         object  : io.reactivex.Observer<MutableList<BooksModel>>{
+//             override fun onSubscribe(d: Disposable) {
+//                 Log.d("RX","on Subcribe")
+//             }
+//
+//             override fun onComplete() {
+//                 Log.d("RX","on Complete")
+//             }
+//
+//             override fun onNext(t: MutableList<BooksModel>) {
+//                 booksViewModel.booksList.clear()
+//                 booksViewModel.booksList.addAll(t)
+//                 booksViewModel.gridViewAdapter.notifyDataSetChanged()
+//             }
+//
+//             override fun onError(e: Throwable) {
+//                 Log.d("RX",e.message)
+//             }
+//
+//
+//         })
 
     }
 

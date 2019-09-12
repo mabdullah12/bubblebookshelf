@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*
 
 @DynamoDBTable(tableName = "bubblebookshelf-mobilehub-851917518-books")
-@Entity
+@Entity (tableName = "books")
 class BooksModel (
     @DynamoDBHashKey(attributeName = "book_id")
     @DynamoDBIndexRangeKey(attributeName = "book_id", globalSecondaryIndexName = "book_category_idx")
